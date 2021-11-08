@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','CriptomonedaController@criptoform');
+//Listado de criptomonedas
+Route::get('/', 'CriptomonedaController@criptolist');
+//Formulario para guardar criptomoneda
+Route::get('/Criptomoneda/Guardar','CriptomonedaController@criptoform');
 //Guardar usuario
-Route::post('/Criptomoneda/Guardar','CriptomonedaController@criptosave');
+Route::post('/Criptomoneda/Guardar/Guardado','CriptomonedaController@criptosave');

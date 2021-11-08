@@ -23,7 +23,7 @@
             @endif
 
             <div class="card">
-                <form action="{{url('/Criptomoneda/Guardar')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('/Criptomoneda/Guardar/Guardado')}}" method="POST" enctype="multipart/form-data">
                     @csrf{{csrf_field()}}
 
                     <div class="card-header text-center">AGREGAR CRIPTOMONEDA</div>

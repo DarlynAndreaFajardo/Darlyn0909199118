@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Criptomoneda;
 use App\Models\LenguajeProgra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CriptomonedaController extends Controller
 {
+    //Listado de criptomoneda
+    public function criptolist(){
+        $criptos = DB::table('criptomoneda')
+            // Relacion de Lenguaje
+            ->join('lenguaje_programacion', 'criptomoneda.lenguaje_id', '=', 'lenguaje_programacion.id')
+            ->select('criptomoneda.*', 'lenguaje_programacion.lenguaje')
+            ->paginate(5);
+
+
+        return view('criptomonedas.listcripto', compact('criptos'));
+    }
+
     //Formulario para crear Criptomoneda
     public function criptoform(){
         $lenguaje = LenguajeProgra::all();
@@ -23,7 +36,7 @@ class CriptomonedaController extends Controller
             'descripcion'=> 'required|max:255',
             'lenguaje' => 'required'
         ]);
-        if($request ->hasfile('foto')){
+        if($request ->hasfile('logotipo')){
             $validator ['logotipo']=$request->file('logotipo')->store('imagenes', 'public');
         }
         Criptomoneda::create([
